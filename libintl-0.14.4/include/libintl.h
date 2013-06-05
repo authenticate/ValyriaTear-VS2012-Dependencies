@@ -39,7 +39,7 @@
    LC_MESSAGES.  To avoid a redefinition warning, don't define LC_MESSAGES
    in this case.  */
 #if !defined LC_MESSAGES && !(defined __LOCALE_H || (defined _LOCALE_H && defined __sun))
-# define LC_MESSAGES 1729
+# define LC_MESSAGES LC_ALL
 #endif
 
 /* We define an additional symbol to signal that we use the GNU
