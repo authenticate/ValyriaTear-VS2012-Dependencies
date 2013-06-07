@@ -23,6 +23,10 @@
 #ifndef LUABIND_OBJECT_050419_HPP
 #define LUABIND_OBJECT_050419_HPP
 
+#ifndef UNREFERENCED_PARAMETER
+#define UNREFERENCED_PARAMETER(P) (P)
+#endif
+
 #include <boost/implicit_cast.hpp> // detail::push()
 #include <boost/ref.hpp> // detail::push()
 #include <boost/mpl/bool.hpp> // value_wrapper_traits specializations
@@ -408,6 +412,9 @@ LUABIND_BINARY_OP_DEF(<, lua_lessthan)
       // TODO: Why is it non-const?
       void push(lua_State* interpreter)
       {
+#ifndef _DEBUG
+          UNREFERENCED_PARAMETER(interpreter);
+#endif
           assert(interpreter == m_interpreter);
           lua_pushvalue(m_interpreter, m_key_index);
           AccessPolicy::get(m_interpreter, m_table_index);
@@ -893,6 +900,9 @@ struct value_wrapper_traits<argument>
 template<class Next>
 inline void adl::index_proxy<Next>::push(lua_State* interpreter)
 {
+#ifndef _DEBUG
+    UNREFERENCED_PARAMETER(interpreter);
+#endif
     assert(interpreter == m_interpreter);
 
     value_wrapper_traits<Next>::unwrap(m_interpreter, m_next);
